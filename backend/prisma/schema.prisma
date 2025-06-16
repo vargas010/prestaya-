@@ -1,0 +1,34 @@
+// backend/prisma/schema.prisma
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Usuario {
+  id        Int      @id @default(autoincrement())
+  nombre    String
+  correo    String   @unique
+  password  String
+  rol       String   @default("usuario")
+  creadoEn  DateTime @default(now())
+
+  prestamos Prestamo[]
+}
+
+model Prestamo {
+  id        Int      @id @default(autoincrement())
+  usuarioId Int
+  usuario   Usuario  @relation(fields: [usuarioId], references: [id])
+  monto     Float
+  plazo     Int
+  motivo    String
+  estado    String   @default("pendiente")
+  creadoEn  DateTime @default(now())
+}
+
+
