@@ -1,4 +1,4 @@
-/* --- RESET BÁSICO --- */
+/* --- RESET --- */
 * {
   margin: 0;
   padding: 0;
@@ -7,15 +7,15 @@
 
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background-color: #f5f5f5;
+  background-color: #f4f6f8;
   color: #333;
   min-height: 100vh;
 }
 
-/* --- NAVBAR SUPERIOR --- */
+/* --- NAVBAR --- */
 .navbar {
-  background-color: #333;
-  padding: 15px 25px;
+  background-color: #1f2937;
+  padding: 15px 30px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -32,92 +32,92 @@ body {
 }
 
 .navbar a:hover {
-  color: #ccc;
+  color: #d1d5db;
 }
 
 .nav-user {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 15px;
 }
 
 .nav-user button {
-  padding: 6px 12px;
-  background-color: #ff4d4d;
+  padding: 8px 16px;
+  background-color: #ef4444;
   color: white;
   border: none;
-  border-radius: 5px;
+  border-radius: 6px;
   cursor: pointer;
-  transition: background-color 0.3s;
+  font-weight: 500;
+  transition: background 0.2s;
 }
 
 .nav-user button:hover {
-  background-color: #e04444;
+  background-color: #dc2626;
 }
 
-/* --- CONTENIDO PRINCIPAL DE PÁGINAS --- */
+/* --- MAIN --- */
 main {
   padding: 40px;
 }
 
-/* --- LOGIN FORM (ya estaba) --- */
+/* --- LOGIN FORM --- */
 .login-form {
   max-width: 400px;
   margin: 60px auto;
   padding: 30px;
   background-color: #fff;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
 }
 
 .login-form h2 {
   text-align: center;
-  margin-bottom: 20px;
+  margin-bottom: 25px;
 }
 
-.login-form form {
-  display: flex;
-  flex-direction: column;
-}
-
-.login-form input {
+.login-form input,
+.login-form select {
   margin-bottom: 15px;
   padding: 10px;
-  font-size: 16px;
+  font-size: 15px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
 }
 
 .login-form button {
-  padding: 10px;
+  padding: 12px;
   font-size: 16px;
-  background-color: #333;
-  color: #fff;
+  background-color: #1f2937;
+  color: white;
   border: none;
+  border-radius: 6px;
+  font-weight: 500;
   cursor: pointer;
-  border-radius: 5px;
 }
 
 .login-form button:hover {
-  background-color: #555;
+  background-color: #374151;
 }
 
-/* --- ADMIN LAYOUT (sidebar + contenido) --- */
+/* --- ADMIN LAYOUT --- */
 .admin-layout {
   display: flex;
-  height: calc(100vh - 60px); /* descontar la navbar */
+  height: calc(100vh - 60px);
 }
 
 .admin-sidebar {
-  width: 220px;
-  background-color: #222;
-  color: #fff;
+  width: 230px;
+  background-color: #111827;
+  color: white;
   padding: 25px;
   display: flex;
   flex-direction: column;
 }
 
 .admin-sidebar h2 {
+  font-size: 18px;
   margin-bottom: 20px;
-  font-size: 20px;
 }
 
 .admin-sidebar ul {
@@ -130,26 +130,26 @@ main {
 }
 
 .admin-sidebar a {
-  color: #fff;
-  text-decoration: none;
   display: block;
-  padding: 6px 10px;
-  border-radius: 4px;
-  transition: background-color 0.2s;
+  padding: 10px 14px;
+  border-radius: 6px;
+  color: white;
+  text-decoration: none;
+  transition: background 0.2s;
 }
 
 .admin-sidebar a:hover {
-  background-color: #444;
+  background-color: #374151;
 }
 
 .admin-main {
   flex: 1;
   padding: 30px;
-  background-color: #f9f9f9;
+  background-color: #f3f4f6;
   overflow-y: auto;
 }
 
-/* --- TABLAS (admin/usuarios, etc.) --- */
+/* --- TABLAS --- */
 .table-container {
   overflow-x: auto;
 }
@@ -158,25 +158,117 @@ table {
   width: 100%;
   border-collapse: collapse;
   background-color: white;
-  border-radius: 8px;
+  border-radius: 10px;
   overflow: hidden;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.05);
 }
 
 th,
 td {
-  padding: 12px 16px;
+  padding: 12px 18px;
   text-align: left;
-  border-bottom: 1px solid #e0e0e0;
+  border-bottom: 1px solid #e5e7eb;
+  font-size: 15px;
 }
 
 th {
-  background-color: #f0f0f0;
+  background-color: #f9fafb;
   font-weight: 600;
 }
 
 tr:hover {
-  background-color: #f9f9f9;
+  background-color: #f3f4f6;
+}
+
+/* --- BOTONES --- */
+button {
+  padding: 8px 14px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background 0.2s ease;
+}
+
+button.aprobar {
+  background-color: #10b981;
+  color: white;
+}
+
+button.rechazar {
+  background-color: #ef4444;
+  color: white;
+}
+
+button.aprobar:hover {
+  background-color: #059669;
+}
+
+button.rechazar:hover {
+  background-color: #dc2626;
+}
+
+button.editar {
+  background-color: #3b82f6;
+  color: white;
+}
+
+button.eliminar {
+  background-color: #ef4444;
+  color: white;
+  margin-left: 8px;
+}
+
+button.editar:hover {
+  background-color: #2563eb;
+}
+
+button.eliminar:hover {
+  background-color: #dc2626;
+}
+
+/* --- MENSAJES --- */
+.mensaje {
+  padding: 12px;
+  border-radius: 6px;
+  font-weight: 500;
+  margin-top: 15px;
+  text-align: center;
+}
+
+.mensaje.exito {
+  background-color: #d1fae5;
+  color: #065f46;
+}
+
+.mensaje.error {
+  background-color: #fee2e2;
+  color: #991b1b;
+}
+
+/* --- ESTADOS --- */
+.estado-tag {
+  padding: 6px 10px;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 14px;
+  display: inline-block;
+  text-transform: capitalize;
+}
+
+.estado-pendiente {
+  background-color: #facc15;
+  color: #000;
+}
+
+.estado-aprobado {
+  background-color: #10b981;
+  color: white;
+}
+
+.estado-rechazado {
+  background-color: #ef4444;
+  color: white;
 }
 
 /* --- RESPONSIVE --- */
@@ -198,16 +290,10 @@ tr:hover {
 
   .admin-sidebar ul {
     display: flex;
-    gap: 10px;
+    gap: 12px;
   }
 
   .admin-main {
     padding: 20px;
   }
-  
-}
-.formulario select {
-  margin-bottom: 15px;
-  padding: 10px;
-  font-size: 16px;
 }

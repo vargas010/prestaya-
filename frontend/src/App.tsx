@@ -12,6 +12,9 @@ import EstadisticasAdmin from './pages/admin/EstadisticasAdmin'
 import Login from './pages/Login'
 import RutaPrivada from './components/RutaPrivada'
 import { useUsuario } from './hooks/useUsuario'
+import SolicitarPrestamo from './pages/SolicitarPrestamo'
+import Registro from './pages/Registro'
+import PrestamosDisponibles from './pages/PrestamosDisponibles'
 
 function App() {
   const usuario = useUsuario()
@@ -27,11 +30,15 @@ function App() {
       <nav className="navbar">
         <div className="nav-links">
           <Link to="/">Inicio</Link>
-          <Link to="/usuarios">Usuarios</Link>
           {usuario?.rol === 'admin' && (
             <Link to="/admin">Admin</Link>
           )}
-
+          {usuario?.rol === 'usuario' && (
+            <Link to="/solicitar-prestamo">Solicitar Préstamo</Link>
+          )}
+          {usuario?.rol === 'prestamista' && (
+            <Link to="/prestamos-disponibles">Préstamos Disponibles</Link>
+          )}
         </div>
 
         <div className="nav-user">
@@ -50,11 +57,25 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/" element={<Inicio />} />
         <Route path="/usuarios" element={<Usuarios />} />
+        <Route path="/registro" element={<Registro />} />
+        <Route path="/prestamos-disponibles" element={<PrestamosDisponibles />} />
 
+
+        {/* ✅ Solo usuarios pueden acceder */}
+        <Route
+          path="/solicitar-prestamo"
+          element={
+            <RutaPrivada soloUsuario>
+              <SolicitarPrestamo />
+            </RutaPrivada>
+          }
+        />
+
+        {/* ✅ Solo admin pueden acceder al panel admin */}
         <Route
           path="/admin"
           element={
-            <RutaPrivada>
+            <RutaPrivada soloAdmin>
               <Admin />
             </RutaPrivada>
           }

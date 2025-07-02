@@ -25,7 +25,6 @@ function Login() {
       const data = await res.json()
       console.log("data:", data)
 
-
       if (!res.ok) {
         throw new Error(data.error || 'Error al iniciar sesión')
       }
@@ -34,9 +33,8 @@ function Login() {
       console.log("🔐 token guardado:", data.token)
 
       setTimeout(() => {
-        navigate('/admin')
+        navigate('/')
       }, 100)
-
 
     } catch (err: any) {
       setError(err.message || 'Error de red')
@@ -65,6 +63,13 @@ function Login() {
         />
         <button type="submit">Ingresar</button>
       </form>
+
+      <p style={{ marginTop: '10px' }}>
+        ¿No tienes cuenta?{' '}
+        <a href="/registro" style={{ color: 'blue' }}>
+          Regístrate aquí
+        </a>
+      </p>
     </div>
   )
 }

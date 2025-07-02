@@ -1,3 +1,5 @@
+// backend/pages/api/auth/register.ts
+
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { prisma } from '../../../lib/prisma'
 import bcrypt from 'bcrypt'
@@ -8,10 +10,14 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
     return res.status(405).json({ error: 'Método no permitido' })
   }
 
-  const { nombre, correo, password } = req.body
+  const { nombre, correo, password, rol } = req.body
 
-  if (!nombre || !correo || !password) {
+  if (!nombre || !correo || !password || !rol) {
     return res.status(400).json({ error: 'Faltan campos requeridos' })
+  }
+
+  if (!['usuario', 'prestamista'].includes(rol)) {
+    return res.status(400).json({ error: 'Rol inválido' })
   }
 
   try {
@@ -27,18 +33,20 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
         nombre,
         correo,
         password: hashed,
+        rol
       },
       select: {
         id: true,
         nombre: true,
         correo: true,
-        creadoEn: true,
-      },
+        rol: true,
+        creadoEn: true
+      }
     })
 
     res.status(201).json({ mensaje: 'Usuario creado', usuario: nuevo })
   } catch (error) {
-    console.error(error)
+    console.error('❌ Error al registrar usuario:', error)
     res.status(500).json({ error: 'Error interno del servidor' })
   }
 }

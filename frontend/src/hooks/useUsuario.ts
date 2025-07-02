@@ -1,7 +1,7 @@
 // frontend/src/hooks/useUsuario.ts
 
 import { useEffect, useState } from 'react'
-import jwtDecode from 'jwt-decode'
+import { jwtDecode } from 'jwt-decode'
 
 type DecodedToken = {
   id: number
@@ -24,20 +24,32 @@ export function useUsuario() {
 
     try {
       const decoded = jwtDecode<DecodedToken>(token)
+      const ahora = Date.now() / 1000
 
-      const ahora = Date.now() / 1000 // Tiempo actual en segundos
       if (decoded.exp < ahora) {
-        console.warn('Token expirado (useUsuario)')
         localStorage.removeItem('token')
         setUsuario(null)
+        window.location.href = '/login'
         return
       }
 
       setUsuario(decoded)
+
+      // 🕒 Logout automático cuando expire el token
+      const tiempoRestante = (decoded.exp - ahora) * 1000
+      const timeout = setTimeout(() => {
+        console.warn('🔒 Token expirado automáticamente')
+        localStorage.removeItem('token')
+        setUsuario(null)
+        window.location.href = '/login'
+      }, tiempoRestante)
+
+      return () => clearTimeout(timeout)
     } catch (error) {
-      console.error('Token inválido (useUsuario)', error)
+      console.error('❌ Token inválido', error)
       localStorage.removeItem('token')
       setUsuario(null)
+      window.location.href = '/login'
     }
   }, [])
 
